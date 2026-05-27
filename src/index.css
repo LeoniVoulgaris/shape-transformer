@@ -24,3 +24,11 @@ html, body, #root {
   border: 1px solid black;
   background: white;
 }
+
+.circle{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid black;
+}
