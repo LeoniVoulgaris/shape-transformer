@@ -54,3 +54,8 @@ Shapes snap into a flex layout within each quadrant rather than being freely pla
 - **No drag-and-drop library**:
 Using `react-dnd` would give better accessibility and touch support out of the box, but adds a dependency and abstraction layer that obscures the core logic. Given the brief favoured clarity, the native API felt more appropriate.
 
+- **Content Security Policy**:
+default-src 'self' locks all resource loading to the same origin.
+style-src includes 'unsafe-inline' because Vite injects styles inline in development.
+No external sources are whitelisted since the app has no third-party dependencies at runtime.
+
