@@ -1,7 +1,14 @@
+import Quadrant from "./components/Quadrant"
+
+
+
 function App() {
   return (
-    <div>
-      <h1>Shape Transformer</h1>
+    <div class="wrapper">
+      <Quadrant />
+      <Quadrant />
+      <Quadrant />
+      <Quadrant />
     </div>
   )
 }
