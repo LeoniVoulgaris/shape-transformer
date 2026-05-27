@@ -1,6 +1,7 @@
 function Quadrant({ id, onDrop, shapes, component: ComponentType }){
   return (
     <div className="rectangle"
+    /* preventDefault is required to allow onDrop, browsers block drops by default*/
     onDragOver={(e) => {e.preventDefault();}}
     onDrop={(e) => {const data = JSON.parse(e.dataTransfer.getData("text/plain"));
     onDrop(data.id, data.fromQuadrant, id);

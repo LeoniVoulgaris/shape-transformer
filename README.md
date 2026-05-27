@@ -1,16 +1,56 @@
-# React + Vite
+- **React** — chosen for its component model, which maps naturally to the shape/quadrant structure of this task
+- **Vite** — fast dev server and minimal config overhead
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Running the Project
 
-## React Compiler
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd <your-repo-name>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Install dependencies
+npm install
 
-## Expanding the ESLint configuration
+# Start the development server
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Open browser at `http://localhost:5173`.
+
+## Functionality
+
+The app renders four quadrants in a 2x2 grid. Five circles are placed in the top-left quadrant on load. Any shape can be dragged into any other quadrant, where it transforms into that quadrant's associated shape:
+
+| Quadrant | Shape |
+|---|---|
+| Top Left | Circle |
+| Top Right | Hexagon |
+| Bottom Left | Square |
+| Bottom Right | Triangle |
+
+Dropping a shape back into its current quadrant leaves it unchanged.
+
+## Design Decisions
+
+- **State lives in `App`**:
+All quadrant data is managed in a single `useState` object at the top level. This makes cross-quadrant communication straightforward and keeps the quadrant/shape components stateless and focused on rendering.
+
+- **Shapes are identified by string ids**:
+Each shape is tracked by an id (e.g. `"shape-1"`). The shape type is not stored in state instead it is derived from whichever quadrant the shape is in. This means transformation on drop is implicit, moving a shape to a new quadrant automatically renders it as the correct type.
+
+- **SVG for shape rendering**:
+Shapes are rendered as inline SVGs wrapped in a draggable `div`. This avoids the border/clip-path issues that i encountered with CSS-only approaches for irregular shapes like triangles and hexagons.
+
+- **Native HTML drag-and-drop API**:
+No external library. `dataTransfer` is used to pass the shape id and origin quadrant between the drag and drop events. This keeps the bundle small and avoids an unnecessary dependency for a task of this scope.
+
+## Trade-offs
+
+- **No free positioning**:
+Shapes snap into a flex layout within each quadrant rather than being freely placeable. Free positioning was considered but adds significant complexity (storing coordinates, calculating drop offsets) that felt out of scope for the time available.
+
+- **No drag-and-drop library**:
+Using `react-dnd` would give better accessibility and touch support out of the box, but adds a dependency and abstraction layer that obscures the core logic. Given the brief favoured clarity, the native API felt more appropriate.
+
