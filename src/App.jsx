@@ -6,6 +6,14 @@ import Hexagon from "./components/Hexagon"
 import Square from "./components/Square"
 
 
+export function moveShape(quadrants, shapeId, fromQuadrant, toQuadrant) {
+  if (fromQuadrant === toQuadrant) return quadrants;
+  const newState = { ...quadrants };
+  newState[fromQuadrant] = quadrants[fromQuadrant].filter((id) => id !== shapeId);
+  newState[toQuadrant] = [...quadrants[toQuadrant], shapeId];
+  return newState;
+}
+
 function App() {
   const [quadrants, setQuadrants] = useState({
     "top-left": ["shape-1", "shape-2", "shape-3", "shape-4", "shape-5"],
@@ -21,16 +29,8 @@ function App() {
     "bottom-right": Triangle,
   }
 
-  const handleDrop = (shapeId,fromQuadrant, toQuadrant) => {
-    if (fromQuadrant === toQuadrant) return;
-
-    setQuadrants(prev => { const newState = { ...prev };
-
-      newState[fromQuadrant] = prev[fromQuadrant].filter((id) => id !== shapeId);
-      newState[toQuadrant] = [...prev[toQuadrant], shapeId];
-
-      return newState;
-    });
+  const handleDrop = (shapeId, fromQuadrant, toQuadrant) => {
+    setQuadrants(prev => moveShape(prev, shapeId, fromQuadrant, toQuadrant));
   }
   return (
     <div className="wrapper">
