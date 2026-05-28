@@ -1,6 +1,6 @@
 function Hexagon({ id, fromQuadrant }) {
   return (
-    <div draggable data-shape-id={id}
+    <div draggable
       onDragStart={(e) => e.dataTransfer.setData("text/plain", JSON.stringify({ id, fromQuadrant }))}>
       <svg width="100" height="100" viewBox="0 0 100 100">
         <polygon points="50,2 98,26 98,74 50,98 2,74 2,26" fill="white" stroke="black" strokeWidth="2"/>
