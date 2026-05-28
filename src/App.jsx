@@ -5,7 +5,7 @@ import Triangle from "./components/Triangle"
 import Hexagon from "./components/Hexagon"
 import Square from "./components/Square"
 
-
+/*moveShape function is outside the component to allow testing */
 export function moveShape(quadrants, shapeId, fromQuadrant, toQuadrant) {
   if (fromQuadrant === toQuadrant) return quadrants;
   const newState = { ...quadrants };
