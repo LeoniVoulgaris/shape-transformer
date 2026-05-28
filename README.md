@@ -17,8 +17,6 @@ npm install
 npm run dev
 ```
 
-Open browser at `http://localhost:5173`.
-
 ## Functionality
 
 The app renders four quadrants in a 2x2 grid. Five circles are placed in the top-left quadrant on load. Any shape can be dragged into any other quadrant, where it transforms into that quadrant's associated shape:
@@ -54,8 +52,8 @@ Shapes snap into a flex layout within each quadrant rather than being freely pla
 - **No drag-and-drop library**:
 Using `react-dnd` would give better accessibility and touch support out of the box, but adds a dependency and abstraction layer that obscures the core logic. Given the brief favoured clarity, the native API felt more appropriate.
 
-- **Content Security Policy**:
-default-src 'self' locks all resource loading to the same origin.
-style-src includes 'unsafe-inline' because Vite injects styles inline in development.
+## Content Security Policy
+-**default-src** 'self' locks all resource loading to the same origin.
+-**style-src** includes 'unsafe-inline' because Vite injects styles inline in development.
 No external sources are whitelisted since the app has no third-party dependencies at runtime.
 
