@@ -7,8 +7,8 @@
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
-cd <your-repo-name>
+git clone https://github.com/LeoniVoulgaris/shape-transformer
+cd shape-transformer
 
 # Install dependencies
 npm install
