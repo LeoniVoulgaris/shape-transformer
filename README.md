@@ -57,3 +57,8 @@ Using `react-dnd` would give better accessibility and touch support out of the b
 -**style-src** includes 'unsafe-inline' because Vite injects styles inline in development.
 No external sources are whitelisted since the app has no third-party dependencies at runtime.
 
+## Testing
+A single unit test is present that cals the moveShape function with a shape-id, source quadrant and destination quadrant.
+Asserts the after the function is called, the shape is not present in the source quadrant and present in the destination quadrant.
+
+Use npm test to run the test
